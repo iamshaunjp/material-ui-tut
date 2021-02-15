@@ -8,6 +8,9 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { AddCircleOutlineOutlined, SubjectOutlined } from '@material-ui/icons'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import { format } from 'date-fns'
 
 const drawerWidth = 240
 
@@ -33,6 +36,14 @@ const useStyles = makeStyles((theme) => {
     title: {
       padding: theme.spacing(2),
     },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    date: {
+      flexGrow: 1
+    },
+    toolbar: theme.mixins.toolbar
   }
 })
 
@@ -57,6 +68,19 @@ export default function Layout({ children }) {
   return (
     <div className={classes.root}>
       {/* app bar */}
+      <AppBar 
+        position="fixed" 
+        className={classes.appBar}
+        elevation={0}
+        color="primary"
+      >
+        <Toolbar>
+          <Typography className={classes.date}>
+            Today is the {format(new Date(), 'do MMMM Y')}
+          </Typography>
+          <Typography>Mario</Typography>
+        </Toolbar>
+      </AppBar>
 
       {/* side drawer */}
       <Drawer
@@ -90,6 +114,7 @@ export default function Layout({ children }) {
 
       {/* main content */}
       <div className={classes.page}>
+        <div className={classes.toolbar}></div>
         { children }
       </div>
     </div>
