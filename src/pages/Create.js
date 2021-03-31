@@ -9,6 +9,9 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: 'blue'
     }
+  },
+  title: {
+    textDecoration: "underline",
   }
 
 })
@@ -19,7 +22,7 @@ export default function Create() {
 
   return (
     <Container>
-      <Typography variant="h4" align="center" component="h2" color="primary">
+      <Typography className={classes.title} variant="h4" align="center" component="h2" color="primary">
         Create a New Note
       </Typography>
       <Typography color="textPrimary">
