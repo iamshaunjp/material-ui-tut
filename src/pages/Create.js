@@ -1,8 +1,22 @@
-import { React, Fragment } from 'react'
-import { Typography, Button, Container, ButtonGroup } from '@material-ui/core'
+import { React } from 'react'
+import { Typography, Button, Container, makeStyles } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
+const useStyles = makeStyles({
+  btn: {
+    fontSize: 60,
+    backgroundColor: 'violet',
+    '&:hover': {
+      backgroundColor: 'blue'
+    }
+  }
+
+})
+
 export default function Create() {
+
+  const classes = useStyles()
+
   return (
     <Container>
       <Typography variant="h4" align="center" component="h2" color="primary">
@@ -13,6 +27,7 @@ export default function Create() {
       </Typography>
 
       <Button
+        className={classes.btn}
         type="submit"
         variant="contained"
         color="secondary"
