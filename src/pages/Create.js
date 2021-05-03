@@ -6,8 +6,25 @@ import Container from '@material-ui/core/Container'
 // import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined'
 import SendIcon from '@material-ui/icons/Send'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  btn: {
+    fontSize: 60,
+    backgroundColor: 'violet',
+    '&:hover': {
+      backgroundColor: 'blue'
+    }
+  },
+  title: {
+    textDecoration: 'underline',
+    marginBottom: 20
+  }
+})
 
 export default function Create() {
+  const classes = useStyles()
+
   return (
     <Container>
       <Typography
@@ -15,6 +32,7 @@ export default function Create() {
         component='h2'
         color='textSecondary'
         gutterBottom
+        className={classes.title}
       >
         Create a New Note
       </Typography>
@@ -40,6 +58,7 @@ export default function Create() {
         variant='contained' 
         // disableElevation
         onClick={() => console.log('Submit button clicked')}
+        className={classes.btn}
       >
         Submit
       </Button>
