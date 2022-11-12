@@ -1,8 +1,19 @@
-import { Container, Grid, Paper } from '@mui/material'
+import { Button, Container, Grid, Paper } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { NoteCard } from '../components/NotesCard'
 
 export default function Notes() {
   const [notes, setNotes] = useState([])
+  const history = useHistory()
+
+  const handleDelete = async (id) => {
+    fetch('http://localhost:8000/notes' + id, {
+      method: 'DELETE'
+    })
+    const newNotes = notes.filter(note => note.id !== id)
+    setNotes(newNotes)
+  }
 
   useEffect(() => {
     fetch('http://localhost:8000/notes')
@@ -12,27 +23,14 @@ export default function Notes() {
 
   return (
     <Container>
-      {/* <Grid container>
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper>1</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper>2</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper>3</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper>4</Paper>
-        </Grid>
-      </Grid> */}
-      <Grid container>
+      <Grid container spacing={3}>
         {notes.map(note => (
           <Grid item key={note.id} xs={12} md={6} lg={4}>
-            <Paper>{note.title}</Paper>
+            <NoteCard note={note} handleDelete={handleDelete}/>
           </Grid>
         ))}
       </Grid>
+      <Button color="secondary" variant="contained" onClick={() => history.push('/create')}>To Create</Button>
       
     </Container>
   )

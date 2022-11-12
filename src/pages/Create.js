@@ -100,10 +100,6 @@ export default function Create() {
           Submit
         </Button>
       </form>
-
-      
-
-      
     </Container>
   )
 }
