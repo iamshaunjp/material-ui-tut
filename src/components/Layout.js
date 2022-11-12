@@ -1,10 +1,11 @@
 import { ClassNames } from "@emotion/react"
 import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material"
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material"
+import { AppBar, Avatar, avatarClasses, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { useHistory, useLocation } from "react-router-dom"
+import { format } from "date-fns"
 
-const drawerWidth = 240
+const drawerWidth = 160
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -27,6 +28,17 @@ const useStyles = makeStyles((theme) => {
     },
     title: {
       padding: theme.spacing(2)
+    },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    toolbar: theme.mixins.toolbar,
+    date: {
+      flexGrow: 1
+    },
+    avatar: {
+      marginLeft: theme.spacing(2)
     }
   }
 })
@@ -51,6 +63,22 @@ export const Layout = ({children}) => {
 
   return (
     <div className={classes.root}>
+
+      <AppBar 
+        className={classes.appBar}
+        elevation={0}
+      >
+        <Toolbar>
+          <Typography className={classes.date}>
+            Today is the { format(new Date(), 'do MMMM Y')}
+          </Typography>
+          <Typography>
+            Mario
+          </Typography>
+          <Avatar className={classes.avatar} src='/mario-av.png' />
+        </Toolbar>
+      </AppBar>
+
       <Drawer
         className={classes.drawer}
         variant='permanent'
@@ -80,6 +108,8 @@ export const Layout = ({children}) => {
       </Drawer>
 
       <div className={classes.page}>
+        <div className={classes.toolbar}>
+        </div>
         {children}
       </div>
     </div>
